@@ -17,6 +17,22 @@ package com.test.algorithm.leetcode.q0001t0100.q2;
  */
 public class Question0012 {
     public static void main(String[] args) {
+        System.out.println(solution(6));
+    }
 
+    private static String solution(int num) {
+        StringBuilder stringBuilder = new StringBuilder();
+        int[] moneys = new int[]{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        String[] moneyToStr = new String[]{"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        int index = 0;
+        while (num > 0) {
+            if (num >= moneys[index]) {
+                stringBuilder.append(moneyToStr[index]);
+                num -= moneys[index];
+                index--;
+            }
+            index++;
+        }
+        return stringBuilder.toString();
     }
 }
