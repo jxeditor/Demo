@@ -1,4 +1,4 @@
-package com.test.algorithm.leetcode.q1t10;
+package com.test.algorithm.leetcode.q0001t0100.q1;
 
 import java.util.ArrayList;
 import java.util.List;
