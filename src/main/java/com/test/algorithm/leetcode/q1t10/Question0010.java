@@ -31,4 +31,5 @@ public class Question0010 {
             return first_match && solution(text.substring(1), pattern.substring(1));
         }
     }
+
 }
