@@ -1,0 +1,14 @@
+创建topic
+kafka-topics --create --zookeeper hadoop03:2181 --replication-factor 1 --partitions 1 --topic test
+
+控制台启动生产者
+kafka-console-producer --broker-list hadoop03:9092 --topic test
+
+控制台消費
+kafka-console-consumer --bootstrap-server hadoop03:9092 --topic test --from-beginning
+
+删除topic
+kafka-topics --delete --zookeeper hadoop03:2181 --topic test
+
+查看topic
+kafka-topics --zookeeper hadoop03:2181 --list

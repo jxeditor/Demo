@@ -1,0 +1,17 @@
+GET test_index/_search
+{
+  "query": {
+    "match_all": {
+
+    }
+  }
+}
+
+POST test_index/_delete_by_query
+{
+  "query":{
+    "match_all": {
+
+    }
+  }
+}

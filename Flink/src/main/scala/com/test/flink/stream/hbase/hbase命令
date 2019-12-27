@@ -1,0 +1,12 @@
+hbase shell
+
+list
+
+scan 'table'
+
+count 'table'
+
+get 'table', 'row'
+
+hbase org.apache.hadoop.hbase.mapreduce.RowCounter 'table'
+
