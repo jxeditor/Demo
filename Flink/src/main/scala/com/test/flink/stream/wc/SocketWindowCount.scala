@@ -44,9 +44,9 @@ object SocketWindowCount {
     val senv = StreamExecutionEnvironment.getExecutionEnvironment
     // senv.enableCheckpointing(60000, CheckpointingMode.EXACTLY_ONCE)
     // senv.setStateBackend(new FsStateBackend("hdfs://hadoop01:8020/flink/checkpoints"))
-    senv.getCheckpointConfig.setTolerableCheckpointFailureNumber(10)
-    val conf = senv.getCheckpointConfig
-    conf.enableExternalizedCheckpoints(ExternalizedCheckpointCleanup.RETAIN_ON_CANCELLATION)
+    // senv.getCheckpointConfig.setTolerableCheckpointFailureNumber(10)
+    //    val conf = senv.getCheckpointConfig
+    //    conf.enableExternalizedCheckpoints(ExternalizedCheckpointCleanup.RETAIN_ON_CANCELLATION)
     val ds = senv.socketTextStream("eva", 9999, '\n')
 
     val wordCounts = ds.flatMap(_.split(" "))

@@ -81,8 +81,8 @@ public class KafkaProducerSimple {
                      * 5、调用producer的send方法发送数据
                      * 注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发
                      */
-//                    producer.send(new KeyedMessage<String, String>(TOPIC, messageNo + ""));
-                    producer.send(new KeyedMessage<String, String>(TOPIC, "a"));
+                    producer.send(new KeyedMessage<String, String>(TOPIC, messageNo + "", messageNo + ""));
+//                    producer.send(new KeyedMessage<String, String>(TOPIC, "a"));
                 }
 
             }

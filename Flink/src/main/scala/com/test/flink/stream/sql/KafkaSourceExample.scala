@@ -54,6 +54,8 @@ object KafkaSourceExample {
     val value = tableEnv.toRetractStream[Row](table)
     value.filter(_._1).print()
 
+
+
     bsEnv.execute("Flink Demo")
   }
 

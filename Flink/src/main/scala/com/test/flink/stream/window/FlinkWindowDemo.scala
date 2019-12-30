@@ -68,7 +68,7 @@ object FlinkWindowDemo {
       .select('business, 'rowtime, 'es, 'proctime)
       .window(
         Slide over 5.second every 2.second on 'rowtime as 'p)
-       .groupBy('p, 'business).select("business,es.count as a")
+      .groupBy('p, 'business).select("business,es.count as a")
 
     tEnv.toRetractStream[Row](table).print()
     env.execute()

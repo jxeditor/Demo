@@ -57,6 +57,7 @@ object StreamSQLExample {
     result.toRetractStream[Order].filter(_._1).print()
 
     tEnv.toAppendStream[Order](result)
+
     env.execute()
   }
 
