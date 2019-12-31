@@ -50,12 +50,13 @@ object StreamSQLExample {
       s"""
          |SELECT user,product,amount as amount FROM $tableA
          |UNION
-         |SELECT user,product,amount as amount FROM OrderB
+         |SELECT user,product %s,amount as amount FROM OrderB
             """.stripMargin)
 
     //    result.toAppendStream[Order].print()
     result.toRetractStream[Order].filter(_._1).print()
 
+    result.map(1)
     tEnv.toAppendStream[Order](result)
 
     env.execute()
