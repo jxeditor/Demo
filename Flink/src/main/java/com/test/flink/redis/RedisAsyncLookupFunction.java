@@ -6,7 +6,6 @@ import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.async.RedisAsyncCommands;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.api.java.typeutils.RowTypeInfo;
-import org.apache.flink.table.dataformat.BinaryRow;
 import org.apache.flink.table.functions.AsyncTableFunction;
 import org.apache.flink.table.functions.FunctionContext;
 import org.apache.flink.types.Row;
@@ -21,14 +20,14 @@ import java.util.function.Consumer;
  * @Date: 2020-01-03 17:21
  * @Description:
  */
-public class MyAsyncLookupFunction extends AsyncTableFunction<Row> {
+public class RedisAsyncLookupFunction extends AsyncTableFunction<Row> {
 
     private final String[] fieldNames;
     private final TypeInformation[] fieldTypes;
 
     private transient RedisAsyncCommands<String, String> async;
 
-    public MyAsyncLookupFunction(String[] fieldNames, TypeInformation[] fieldTypes) {
+    public RedisAsyncLookupFunction(String[] fieldNames, TypeInformation[] fieldTypes) {
         this.fieldNames = fieldNames;
         this.fieldTypes = fieldTypes;
     }
@@ -47,12 +46,11 @@ public class MyAsyncLookupFunction extends AsyncTableFunction<Row> {
         String[] info = {"userInfo", "userId", paramas[0].toString(), "userName"};
         String key = String.join(":", info);
         RedisFuture<String> redisFuture = async.get(key);
-        System.out.println(key);
+
         redisFuture.thenAccept(new Consumer<String>() {
             @Override
             public void accept(String value) {
-                System.out.println(value);
-                future.complete(Collections.singletonList(Row.of(key, value,"")));
+                future.complete(Collections.singletonList(Row.of(key, value, "aaa")));
                 //todo
                 // BinaryRow row = new BinaryRow(2);
             }
@@ -85,8 +83,8 @@ public class MyAsyncLookupFunction extends AsyncTableFunction<Row> {
             return this;
         }
 
-        public MyAsyncLookupFunction build() {
-            return new MyAsyncLookupFunction(fieldNames, fieldTypes);
+        public RedisAsyncLookupFunction build() {
+            return new RedisAsyncLookupFunction(fieldNames, fieldTypes);
         }
     }
 }

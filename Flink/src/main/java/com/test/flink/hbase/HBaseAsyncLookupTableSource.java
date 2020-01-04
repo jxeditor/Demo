@@ -1,4 +1,4 @@
-package com.test.flink.redis;
+package com.test.flink.hbase;
 
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.api.java.typeutils.RowTypeInfo;
@@ -18,11 +18,13 @@ import org.apache.flink.types.Row;
  * @Date: 2020-01-03 17:23
  * @Description:
  */
-public class RedisAsyncLookupTableSource implements StreamTableSource<Row>, LookupableTableSource<Row> {
+public class HBaseAsyncLookupTableSource implements StreamTableSource<Row>, LookupableTableSource<Row> {
+    private final String tableName;
     private final String[] fieldNames;
     private final TypeInformation[] fieldTypes;
 
-    public RedisAsyncLookupTableSource(String[] fieldNames, TypeInformation[] fieldTypes) {
+    public HBaseAsyncLookupTableSource(String tableName, String[] fieldNames, TypeInformation[] fieldTypes) {
+        this.tableName = tableName;
         this.fieldNames = fieldNames;
         this.fieldTypes = fieldTypes;
     }
@@ -36,7 +38,8 @@ public class RedisAsyncLookupTableSource implements StreamTableSource<Row>, Look
     //异步方法
     @Override
     public AsyncTableFunction<Row> getAsyncLookupFunction(String[] strings) {
-        return RedisAsyncLookupFunction.Builder.getBuilder()
+        return HBaseAsyncLookupFunction.Builder.getBuilder()
+                .withTableName(tableName)
                 .withFieldNames(fieldNames)
                 .withFieldTypes(fieldTypes)
                 .build();
@@ -66,6 +69,7 @@ public class RedisAsyncLookupTableSource implements StreamTableSource<Row>, Look
     }
 
     public static final class Builder {
+        private String tableName;
         private String[] fieldNames;
         private TypeInformation[] fieldTypes;
 
@@ -86,8 +90,13 @@ public class RedisAsyncLookupTableSource implements StreamTableSource<Row>, Look
             return this;
         }
 
-        public RedisAsyncLookupTableSource build() {
-            return new RedisAsyncLookupTableSource(fieldNames, fieldTypes);
+        public Builder withTableName(String tableName) {
+            this.tableName = tableName;
+            return this;
+        }
+
+        public HBaseAsyncLookupTableSource build() {
+            return new HBaseAsyncLookupTableSource(tableName, fieldNames, fieldTypes);
         }
     }
 }

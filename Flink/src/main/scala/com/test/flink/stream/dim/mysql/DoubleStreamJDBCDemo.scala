@@ -1,11 +1,12 @@
-package com.test.flink.stream.mysql
+package com.test.flink.stream.dim.mysql
 
 import org.apache.flink.api.java.io.jdbc.{JDBCOptions, JDBCTableSource}
-import org.apache.flink.api.scala._
 import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
+import org.apache.flink.table.api.scala.StreamTableEnvironment
 import org.apache.flink.table.api.{DataTypes, EnvironmentSettings, TableSchema}
-import org.apache.flink.table.api.scala.{StreamTableEnvironment, _}
 import org.apache.flink.types.Row
+import org.apache.flink.table.api.scala._
+import org.apache.flink.api.scala._
 
 /**
  * @Author: xs
@@ -52,4 +53,3 @@ object DoubleStreamJDBCDemo {
   case class Demo(user: Int, result: String)
 
 }
-

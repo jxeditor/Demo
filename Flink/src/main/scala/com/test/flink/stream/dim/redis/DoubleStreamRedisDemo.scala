@@ -1,4 +1,4 @@
-package com.test.flink.stream.redis
+package com.test.flink.stream.dim.redis
 
 import com.test.flink.redis.RedisAsyncLookupTableSource
 import org.apache.flink.api.common.typeinfo.{BasicTypeInfo, TypeInformation, Types}
@@ -31,23 +31,24 @@ object DoubleStreamRedisDemo {
 
     tEnv.registerDataStream("user_click_name", demo, 'id, 'user_click, 'time, 'proctime.proctime)
 
-    val redisSource = RedisAsyncLookupTableSource.Builder.newBuilder().withFieldNames(Array("id", "name"))
-      .withFieldTypes(Array(Types.STRING, Types.STRING))
+    val redisSource = RedisAsyncLookupTableSource.Builder.newBuilder().withFieldNames(Array("id", "name", "age"))
+      .withFieldTypes(Array(Types.STRING, Types.STRING, Types.STRING))
       .build()
     tEnv.registerTableSource("info", redisSource)
 
     val sql =
     //"select t1.id,t1.user_click,t2.name" +
-      "select t1.id" +
+      "select * " +
         " from user_click_name as t1" +
         " join info FOR SYSTEM_TIME AS OF t1.proctime as t2" +
         " on t1.id = t2.id"
 
     val table = tEnv.sqlQuery(sql)
     val tableName = table.toString
-    //    val value1 = tEnv.toAppendStream[Row](table)
+    tEnv.toAppendStream[Row](table).print()
     //    val value2 = tEnv.toRetractStream[Row](table).filter(_._1).map(_._2)
 
+    // ----------------------------------------------------------------------------
 
     // AppendTableSink
     val sinkA = JDBCAppendTableSink.builder()
@@ -76,9 +77,9 @@ object DoubleStreamRedisDemo {
         .build())
       .setFlushIntervalMills(1)
       .build()
-    tEnv.registerTableSink("jdbcOutputTable", sinkB)
+    // tEnv.registerTableSink("jdbcOutputTable", sinkB)
 
-    table.insertInto("jdbcOutputTable")
+    // table.insertInto("jdbcOutputTable")
     //    val insertSQL = "insert into jdbcOutputTable (uid) select id from " + tableName
     //    tEnv.sqlUpdate(insertSQL)
     tEnv.execute("")
