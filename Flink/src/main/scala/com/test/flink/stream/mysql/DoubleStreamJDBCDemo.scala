@@ -10,7 +10,7 @@ import org.apache.flink.types.Row
 /**
  * @Author: xs
  * @Date: 2019-12-24 13:41
- * @Description:
+ * @Description: 流表join
  */
 object DoubleStreamJDBCDemo {
   def main(args: Array[String]): Unit = {
