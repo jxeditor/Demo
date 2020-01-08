@@ -19,10 +19,11 @@ object FlinkSinkToKafka {
     val props = new Properties()
     props.put("bootstrap.servers", "hadoop01:9092")
     props.put("zookeeper.connect", "hadoop01:2181")
-    props.put("group.id", "group")
+    props.put("group.id", "demo")
     props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
     props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
-    props.put("auto.offset.reset", "latest")
+//    props.put("auto.offset.reset", "latest")
+    props.put("auto.offset.reset", "earliest")
 
     val student = env.addSource(new FlinkKafkaConsumer010(READ_TOPIC, //这个 kafka topic 需要和上面的工具类的 topic 一致
       new SimpleStringSchema, props)).setParallelism(1)

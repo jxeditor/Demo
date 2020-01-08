@@ -62,7 +62,6 @@ object DoubleStreamRedisDemo {
       .build()
     //    tEnv.registerTableSink("jdbcOutputTable", Array[String]("uid"), Array[TypeInformation[_]](BasicTypeInfo.STRING_TYPE_INFO), sinkA)
 
-
     // UpsertTableSink
     val sinkB = JDBCUpsertTableSink.builder()
       .setOptions(JDBCOptions.builder()

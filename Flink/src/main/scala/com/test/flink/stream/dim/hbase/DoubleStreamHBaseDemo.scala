@@ -32,12 +32,12 @@ object DoubleStreamHBaseDemo {
 
     tEnv.registerDataStream("user_click_name", demo, 'id, 'user_click, 'time, 'proctime.proctime)
 
-    val redisSource = HBaseAsyncLookupTableSource.Builder.newBuilder()
+    val hbaseSource = HBaseAsyncLookupTableSource.Builder.newBuilder()
       .withFieldNames(Array("id", "name", "age"))
       .withFieldTypes(Array(Types.STRING, Types.STRING, Types.STRING))
       .withTableName("user")
       .build()
-    tEnv.registerTableSource("info", redisSource)
+    tEnv.registerTableSource("info", hbaseSource)
 
     val sql =
     //"select t1.id,t1.user_click,t2.name" +

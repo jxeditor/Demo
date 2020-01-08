@@ -7,6 +7,7 @@ import org.apache.flink.table.api.{DataTypes, EnvironmentSettings, TableSchema}
 import org.apache.flink.types.Row
 import org.apache.flink.table.api.scala._
 import org.apache.flink.api.scala._
+import org.apache.flink.table.factories.TableSinkFactory
 
 /**
  * @Author: xs

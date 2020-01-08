@@ -1,12 +1,15 @@
 package com.test.flink.stream.hbase.develop
 
+import org.apache.flink.addons.hbase.{HBaseTableSchema, HBaseUpsertSinkFunction}
+import org.apache.flink.api.common.typeutils.TypeSerializer
 import org.apache.flink.configuration.Configuration
-import org.apache.flink.streaming.api.functions.sink.{RichSinkFunction, SinkFunction}
+import org.apache.flink.streaming.api.functions.sink.{RichSinkFunction, SinkFunction, TwoPhaseCommitSinkFunction}
 import org.apache.flink.streaming.api.functions.source.{RichSourceFunction, SourceFunction}
 import org.apache.flink.streaming.api.scala._
 import org.apache.hadoop.hbase.{HBaseConfiguration, TableName}
 import org.apache.hadoop.hbase.client._
 import org.apache.hadoop.hbase.util.Bytes
+import org.apache.flink.types.Row
 
 object HBaseDemoOnSink {
   def main(args: Array[String]): Unit = {
@@ -18,6 +21,7 @@ object HBaseDemoOnSink {
       .keyBy(0)
       .sum(1).map(x => {
       (x._1, x._2.toString)
+//      (true, Row.of(""))
     })
     wordCounts.print().setParallelism(1)
     println(wordCounts)
@@ -100,21 +104,23 @@ object HBaseDemoOnSink {
         }
       }
     })
+    val conf: org.apache.hadoop.conf.Configuration = HBaseConfiguration.create()
+    // wordCounts.addSink(new HBaseUpsertSinkFunction())
     env.execute()
   }
 }
 
 
 /**
-  create external table hbasedemo(
-    key string,
-    cl1 string,
-    cl2 string)
-  row format serde 'org.apache.hadoop.hive.hbase.HBaseSerDe'
-  stored by 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
-  with serdeproperties(
-    'hbase.columns.mapping'=':key,\nF1:M,\nF2:M',
-    'serialization.format'='1')
-  tblproperties('hbase.table.name'='KYLIN_EKZFKGYDY7');
-
-  */
+ * create external table hbasedemo(
+ * key string,
+ * cl1 string,
+ * cl2 string)
+ * row format serde 'org.apache.hadoop.hive.hbase.HBaseSerDe'
+ * stored by 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+ * with serdeproperties(
+ * 'hbase.columns.mapping'=':key,\nF1:M,\nF2:M',
+ * 'serialization.format'='1')
+ * tblproperties('hbase.table.name'='KYLIN_EKZFKGYDY7');
+ *
+ */
