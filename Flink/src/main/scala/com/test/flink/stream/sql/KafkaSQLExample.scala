@@ -19,9 +19,10 @@ object KafkaSQLExample {
     val tableEnv = StreamTableEnvironment.create(bsEnv, bsSettings)
 
 
+    // json-schema与derive-schema只能选一个使用
     val sql = "create table test (" +
       "`business` varchar," +
-      "`ts` bigint" +
+      "`ts` DECIMAL" +
       ") with (" +
       " 'connector.type' = 'kafka', " +
       " 'connector.version' = '0.10', " +
@@ -36,7 +37,20 @@ object KafkaSQLExample {
       //      " 'connector.startup-mode' = 'earliest-offset', " +
       " 'connector.startup-mode' = 'latest-offset', " +
       " 'format.type' = 'json', " +
-      " 'format.derive-schema' = 'true' " +
+//      " 'format.derive-schema' = 'true', " +
+      " 'format.json-schema' = " +
+      "     '{" +
+      "       \"type\":\"object\"," +
+      "       \"properties\": { " +
+      "         \"business\": {" +
+      "             \"type\":\"string\"" +
+      "           }," +
+      "         \"ts\": {" +
+      "             \"type\":\"number\" " +
+//      "             \"format\":\"date-time\"" +
+      "           }" +
+      "       }" +
+      "     }'" +
       ")"
 
     tableEnv.sqlUpdate(sql)
