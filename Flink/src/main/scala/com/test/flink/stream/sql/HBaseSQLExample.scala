@@ -14,7 +14,7 @@ import org.apache.flink.types.Row
  */
 object HBaseSQLExample {
   def main(args: Array[String]): Unit = {
-    System.setProperty("HADOOP_USER_NAME", "hdfs")
+    // System.setProperty("HADOOP_USER_NAME", "hdfs")
 
     val bsEnv = StreamExecutionEnvironment.getExecutionEnvironment
     val bsSettings = EnvironmentSettings.newInstance().useBlinkPlanner().inStreamingMode().build
@@ -28,7 +28,7 @@ object HBaseSQLExample {
       " 'connector.type' = 'hbase', " +
       " 'connector.version' = '1.4.3', " +
       " 'connector.table-name' = 'user', " +
-      " 'connector.zookeeper.quorum' = 'hadoop01:2181', " +
+      " 'connector.zookeeper.quorum' = 'cdh04:2181', " +
       " 'connector.zookeeper.znode.parent' = '/hbase', " +
       " 'connector.write.buffer-flush.max-size' = '1mb', " +
       " 'connector.write.buffer-flush.max-rows' = '1', " +

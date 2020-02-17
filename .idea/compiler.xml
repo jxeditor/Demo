@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Kafka" />
+        <module name="Flink10" />
         <module name="Spark" />
         <module name="Flink" />
       </profile>

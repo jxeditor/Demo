@@ -1,5 +1,10 @@
 package com.test.algorithm;
 
+import org.codehaus.commons.compiler.CompileException;
+import org.codehaus.janino.ScriptEvaluator;
+
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * @Author: xs
  * @Date: 2019-11-28 15:29
@@ -35,7 +40,7 @@ public class SingleListReverse {
         return prev;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CompileException, InvocationTargetException {
         ListNode a = new ListNode(1);
         ListNode b = new ListNode(2);
         ListNode c = new ListNode(3);
@@ -46,5 +51,20 @@ public class SingleListReverse {
 
         ListNode result = reverseList(a);
         System.out.println(result.next.val);
+
+        String value = "\"{'data': [-1, 2358513858109449, 1, 'ffffffff-d066-4f4b-ffff-ffffc64e4518', '1db8248e-2ca9-4337-9c8e-9765d3b21a63', null, '337956e4408101f716aefab6b0b7b0c4', 'f8ffc8c37ce4', 'QC_Reference_Phone,Xiaomi,armeabi-v7a,santoni,Xiaomi,Redmi 4X,santoni', 1576759226316], 'createTime': 1576759226316}\"";
+        ScriptEvaluator se = new ScriptEvaluator();
+        se.setReturnType(String.class);
+        se.cook("import com.alibaba.fastjson.JSON;\n" +
+                "        import com.alibaba.fastjson.JSONArray;\n" +
+                "        import com.alibaba.fastjson.JSONObject;\n" +
+                "        System.out.println(" + value + ");" +
+                "        String valueData = " + value + ";\n" +
+                "        JSONObject jsonObject = JSON.parseObject(valueData);\n" +
+                "        JSONArray data = jsonObject.getJSONArray(\"data\");\n" +
+                "        String adjustId = (String) data.get(3);\n" +
+                "        return adjustId;");
+        Object evaluate = se.evaluate(new Object[]{});
+        System.out.println(evaluate.toString());
     }
 }

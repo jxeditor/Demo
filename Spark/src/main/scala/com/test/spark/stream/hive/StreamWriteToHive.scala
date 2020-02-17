@@ -4,6 +4,7 @@ import com.test.spark.log.LoggerLevels
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.{SaveMode, SparkSession}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
+import org.apache.spark.sql.functions._
 
 /**
  * @Author: xs
@@ -15,6 +16,9 @@ object StreamWriteToHive {
     LoggerLevels.setLogLevels()
     System.setProperty("hadoop.home.dir", "D:\\DevEnv\\Hadoop\\2.6.0")
     val conf = new SparkConf().setAppName("StreamWriteToHBase").setMaster("local[*]")
+
+
+    val str = """\\\\"""
 
     val session = SparkSession.builder().config(conf)
       .enableHiveSupport()
@@ -30,7 +34,7 @@ object StreamWriteToHive {
     result.foreachRDD(rdd => {
       import session.sqlContext.implicits._
       rdd.toDF("name", "count").createOrReplaceTempView("test")
-      val dataframe = session.sql("select * from  test ")
+      val dataframe = session.sql("select * from  test ").groupBy("").agg(collect_list(""))
       dataframe.show()
     })
     // DFrame

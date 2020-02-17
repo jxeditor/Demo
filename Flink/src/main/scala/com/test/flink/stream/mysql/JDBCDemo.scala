@@ -47,7 +47,7 @@ object JDBCDemo {
       .setParameterTypes(Types.LONG)
       .build()
 
-    tEnv.registerTableSink("jdbcOutputTable", Array[String]("uid"), Array[TypeInformation[_]](BasicTypeInfo.LONG_TYPE_INFO), sinkA)
+    tEnv.registerTableSink("jdbcOutputTable", Array[String]("uid",""), Array[TypeInformation[_]](BasicTypeInfo.LONG_TYPE_INFO), sinkA)
 
     //    val stream = tableA.javaStream
     //    stream.print()

@@ -12,6 +12,7 @@
         <module>Flink</module>
         <module>Spark</module>
         <module>Kafka</module>
+        <module>Flink10</module>
     </modules>
 
     <properties>
@@ -20,8 +21,14 @@
         <hbase.version>1.2.0</hbase.version>
         <es.version>6.6.1</es.version>
         <spark.version>1.6.3</spark.version>
+        <prometheus.version>0.8.0</prometheus.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+            <version>3.0.11</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-core</artifactId>
@@ -36,6 +43,24 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20170516</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>simpleclient</artifactId>
+            <version>${prometheus.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>simpleclient_httpserver</artifactId>
+            <version>${prometheus.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>simpleclient_pushgateway</artifactId>
+            <version>${prometheus.version}</version>
         </dependency>
     </dependencies>
     <build>

@@ -1,21 +1,13 @@
 package com.test.flink.stream.window
 
-import org.apache.flink.streaming.api.functions.sink.SinkFunction
-import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction
-import org.apache.flink.streaming.api.functions.source.SourceFunction.SourceContext
 import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
-import org.apache.flink.streaming.api.windowing.time.Time
-import java.util.concurrent.TimeUnit.MILLISECONDS
-
 import org.apache.flink.table.api.scala._
 import org.apache.flink.api.common.typeinfo.{BasicTypeInfo, TypeInformation, Types}
 import org.apache.flink.api.scala._
 import org.apache.flink.streaming.api.TimeCharacteristic
-import org.apache.flink.streaming.api.windowing.assigners.SlidingEventTimeWindows
 import org.apache.flink.table.api.{DataTypes, EnvironmentSettings, Slide, Tumble}
 import org.apache.flink.table.api.scala.StreamTableEnvironment
 import org.apache.flink.table.descriptors.{Json, Kafka, Rowtime, Schema}
-import org.apache.flink.table.types.DataType
 import org.apache.flink.types.Row
 
 /**
@@ -35,7 +27,7 @@ object FlinkWindowDemo {
     tEnv.connect(new Kafka()
       .version("0.10")
       .topic("test01")
-      .property("bootstrap.servers", "hadoop03:9092")
+      .property("bootstrap.servers", "cdh04:9092")
       .startFromEarliest())
       .withFormat(new Json().failOnMissingField(false).schema(
         Types.ROW_NAMED(
@@ -68,9 +60,9 @@ object FlinkWindowDemo {
       .select('business, 'rowtime, 'es, 'proctime)
       .window(
         Slide over 5.second every 2.second on 'rowtime as 'p)
-      .groupBy('p, 'business).select("business,es.count as a")
-
-    tEnv.toRetractStream[Row](table).print()
+      .groupBy('p, 'business).aggregate('es.count as 'num)
+      .select('business, 'num, 'p.start, 'p.end)
+    tEnv.toAppendStream[Row](table).print()
     env.execute()
   }
 }
