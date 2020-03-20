@@ -20,13 +20,14 @@ object LocalSqlDemo {
     val all = spark.read.json("D:\\工作\\IdeaProjects\\Demo\\Spark\\src\\main\\resources\\all.json").selectExpr("name", "be", "'all' as flag", "all_count as count")
     val tea = spark.read.json("D:\\工作\\IdeaProjects\\Demo\\Spark\\src\\main\\resources\\tea.json").selectExpr("name", "be", "'tea' as flag", "tea_count as count")
     val stu = spark.read.json("D:\\工作\\IdeaProjects\\Demo\\Spark\\src\\main\\resources\\stu.json").selectExpr("name", "be", "'stu' as flag", "stu_count as count")
+    val test = Seq("name", "be")
     all.union(tea).union(stu).selectExpr(
       "name", "be",
       "if(flag = 'all', count, 0) as all_count",
       "if(flag = 'tea', count, 0) as tea_count",
       "if(flag = 'stu', count, 0) as stu_count"
     ).groupBy(
-      "name", "be"
+      "", test: _*
     ).agg(
       sum("all_count").as("all_count"),
       sum("tea_count").as("tea_count"),
@@ -40,7 +41,7 @@ object LocalSqlDemo {
     //    ).join(
     //      stu,Seq("name","be"),"left"
     //    ).show()
-
+    all.except(tea)
     all.union(tea).union(stu).selectExpr(
       "ref",
       "IF(flag = 0,user_id,NULL) as user_id_0",

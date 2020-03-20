@@ -12,9 +12,9 @@ import org.apache.flink.types.Row
 /**
  * @Author: xs
  * @Date: 2020-02-17 21:00
- * @Description:
+ * @Description: 行转多列
  */
-class TransformUDTF extends TableFunction[Row] {
+class TransformR2CUDTF extends TableFunction[Row] {
 
   def eval(str: String) = {
     val obj = JSON.parseObject(str)

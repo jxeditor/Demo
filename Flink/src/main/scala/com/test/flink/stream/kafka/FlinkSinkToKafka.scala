@@ -30,8 +30,8 @@ object FlinkSinkToKafka {
       READ_TOPIC, //这个 kafka topic 需要和上面的工具类的 topic 一致
       new SimpleStringSchema, props).setStartFromLatest())
 
-//    student.addSink(new FlinkKafkaProducer010("hadoop01:9092", "test01", new SimpleStringSchema)).name("test01")
-//      .setParallelism(6)
+    student.addSink(new FlinkKafkaProducer010("hadoop01:9092", "test01", new SimpleStringSchema)).name("test01")
+    //      .setParallelism(6)
 
     student.print()
 
