@@ -5,11 +5,11 @@ import org.apache.flink.streaming.connectors.kafka.KafkaDeserializationSchema
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.json.JSONObject
 
-class JsonDeserializationSchema extends KafkaDeserializationSchema[String] {
+class JsonDeserializationSchema extends KafkaDeserializationSchema[JSONObject] {
 
-  override def isEndOfStream(nextElement: String) = false
+  override def isEndOfStream(nextElement: JSONObject) = false
 
-  override def deserialize(record: ConsumerRecord[Array[Byte], Array[Byte]]): String = {
+  override def deserialize(record: ConsumerRecord[Array[Byte], Array[Byte]]): JSONObject = {
     val json = new JSONObject()
 
     json.put("topic", record.topic)
@@ -18,7 +18,7 @@ class JsonDeserializationSchema extends KafkaDeserializationSchema[String] {
     json.put("timestamp", record.timestamp())
     json.put("key", if (record.key() == null) null else new String(record.key()))
     json.put("value", if (record.value() == null) null else new String(record.value()))
-    json.toString()
+    json
   }
 
   override def getProducedType: TypeInformation[String] = BasicTypeInfo.STRING_TYPE_INFO

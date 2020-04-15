@@ -4,7 +4,7 @@
 <configuration>
   <property>
     <name>hive.metastore.uris</name>
-    <value>thrift://hadoop01:9083</value>
+    <value>thrift://skuldcdhtest1.ktcs:9083</value>
   </property>
   <property>
     <name>hive.metastore.client.socket.timeout</name>
@@ -40,7 +40,7 @@
   </property>
   <property>
     <name>hive.server2.logging.operation.log.location</name>
-    <value>/var/log/hive/operation_logs</value>
+    <value>/hadoop_data/logs/hive/operation_logs</value>
   </property>
   <property>
     <name>mapred.reduce.tasks</name>
@@ -76,7 +76,27 @@
   </property>
   <property>
     <name>hive.vectorized.execution.reduce.enabled</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>hive.vectorized.use.vectorized.input.format</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>hive.vectorized.use.checked.expressions</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>hive.vectorized.use.vector.serde.deserialize</name>
     <value>false</value>
+  </property>
+  <property>
+    <name>hive.vectorized.adaptor.usage.mode</name>
+    <value>chosen</value>
+  </property>
+  <property>
+    <name>hive.vectorized.input.format.excludes</name>
+    <value>org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat</value>
   </property>
   <property>
     <name>hive.merge.mapfiles</name>
@@ -140,11 +160,11 @@
   </property>
   <property>
     <name>spark.executor.memory</name>
-    <value>912680550</value>
+    <value>16191612518b</value>
   </property>
   <property>
     <name>spark.driver.memory</name>
-    <value>966367641</value>
+    <value>3865470566b</value>
   </property>
   <property>
     <name>spark.executor.cores</name>
@@ -152,11 +172,11 @@
   </property>
   <property>
     <name>spark.yarn.driver.memoryOverhead</name>
-    <value>102</value>
+    <value>409m</value>
   </property>
   <property>
     <name>spark.yarn.executor.memoryOverhead</name>
-    <value>153</value>
+    <value>2724m</value>
   </property>
   <property>
     <name>spark.dynamicAllocation.enabled</name>
@@ -184,7 +204,7 @@
   </property>
   <property>
     <name>hive.zookeeper.quorum</name>
-    <value>hadoop03,hadoop02,hadoop01</value>
+    <value>skuldcdhtest2.ktcs,skuldcdhtest3.ktcs,skuldcdhtest1.ktcs</value>
   </property>
   <property>
     <name>hive.zookeeper.client.port</name>
@@ -193,14 +213,6 @@
   <property>
     <name>hive.zookeeper.namespace</name>
     <value>hive_zookeeper_namespace_hive</value>
-  </property>
-  <property>
-    <name>hbase.zookeeper.quorum</name>
-    <value>hadoop03,hadoop02,hadoop01</value>
-  </property>
-  <property>
-    <name>hbase.zookeeper.property.clientPort</name>
-    <value>2181</value>
   </property>
   <property>
     <name>hive.cluster.delegation.token.store.class</name>
@@ -216,6 +228,26 @@
   </property>
   <property>
     <name>spark.shuffle.service.enabled</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>hive.strict.checks.orderby.no.limit</name>
+    <value>false</value>
+  </property>
+  <property>
+    <name>hive.strict.checks.no.partition.filter</name>
+    <value>false</value>
+  </property>
+  <property>
+    <name>hive.strict.checks.type.safety</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>hive.strict.checks.cartesian.product</name>
+    <value>false</value>
+  </property>
+  <property>
+    <name>hive.strict.checks.bucketing</name>
     <value>true</value>
   </property>
 </configuration>

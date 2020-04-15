@@ -15,7 +15,7 @@ import org.json.{JSONArray, JSONObject}
 object TextFileWordCount {
   def main(args: Array[String]): Unit = {
 
-    val env = ExecutionEnvironment.getExecutionEnvironment
+    val env =
 
 
     val text = env.readTextFile("D:\\工作\\IdeaProjects\\Demo\\Flink\\src\\main\\resources\\wc.txt")
