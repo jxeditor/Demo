@@ -22,7 +22,7 @@ object HiveDemoOnSink {
     //    properties.setProperty("auto.offset.reset", "latest")
     properties.setProperty("auto.offset.reset", "earliest")
     properties.setProperty(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true")
-    val consumer010 = new FlinkKafkaConsumer010[JSONObject](
+    val consumer010 = new FlinkKafkaConsumer010[String](
       // "test",
       List("test", "test1"),
       new JsonDeserializationSchema(),
