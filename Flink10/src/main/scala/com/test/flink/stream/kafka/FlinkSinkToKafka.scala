@@ -6,6 +6,7 @@ import java.util.Properties
 
 import com.alibaba.fastjson.JSON
 import org.apache.flink.api.common.serialization.SimpleStringSchema
+import org.apache.flink.metrics.MeterView
 import org.apache.flink.streaming.api.scala.StreamExecutionEnvironment
 import org.apache.flink.streaming.connectors.kafka.{FlinkKafkaConsumer, FlinkKafkaProducer, KafkaSerializationSchema}
 import org.apache.flink.streaming.api.scala._

@@ -33,7 +33,8 @@ object KafkaWindowDemo {
         | SELECT business,COUNT(1) as pv,
         | TUMBLE_START(rowtime, INTERVAL '5' second) as t_start,
         | TUMBLE_END(rowtime, INTERVAL '5' second) as t_end
-        | FROM test GROUP BY business,TUMBLE(rowtime, INTERVAL '5' second)
+        | FROM test
+        | GROUP BY business,TUMBLE(rowtime, INTERVAL '5' second)
             """.stripMargin
     val res1 = tEnv.sqlQuery(query)
     res1.toAppendStream[Row].print()

@@ -13,6 +13,7 @@
         <module>Spark</module>
         <module>Kafka</module>
         <module>Flink10</module>
+        <module>Metics</module>
     </modules>
 
     <properties>
