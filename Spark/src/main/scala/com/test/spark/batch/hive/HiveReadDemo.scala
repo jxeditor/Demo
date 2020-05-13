@@ -9,7 +9,7 @@ import org.apache.spark.sql.SparkSession
   */
 object HiveReadDemo {
   def main(args: Array[String]): Unit = {
-    LoggerLevels.setLogLevels()
+//    LoggerLevels.setLogLevels()
     System.setProperty("hadoop.home.dir", "E:\\Soft\\hadoop-2.8.0")
     val conf = new SparkConf().setAppName("StreamWriteToHBase").setMaster("local[*]")
     val session = SparkSession.builder().config(conf)

@@ -47,21 +47,30 @@
         </dependency>
 
         <dependency>
+            <groupId>com.beachape</groupId>
+            <artifactId>enumeratum_2.11</artifactId>
+            <version>1.5.13</version>
+        </dependency>
+
+        <dependency>
             <groupId>io.prometheus</groupId>
             <artifactId>simpleclient</artifactId>
             <version>${prometheus.version}</version>
+            <!--            <scope>runtime</scope>-->
         </dependency>
 
         <dependency>
             <groupId>io.prometheus</groupId>
             <artifactId>simpleclient_httpserver</artifactId>
             <version>${prometheus.version}</version>
+            <!--            <scope>runtime</scope>-->
         </dependency>
 
         <dependency>
             <groupId>io.prometheus</groupId>
             <artifactId>simpleclient_pushgateway</artifactId>
             <version>${prometheus.version}</version>
+            <!--            <scope>runtime</scope>-->
         </dependency>
     </dependencies>
     <build>
@@ -116,11 +125,11 @@
                     </execution>
                 </executions>
                 <configuration>
-<!--                    <archive>-->
-<!--                        <manifest>-->
-<!--                            <mainClass>com.dev.flink.stream.hive.HiveDemoOnSink</mainClass>-->
-<!--                        </manifest>-->
-<!--                    </archive>-->
+                    <!--                    <archive>-->
+                    <!--                        <manifest>-->
+                    <!--                            <mainClass>com.dev.flink.stream.hive.HiveDemoOnSink</mainClass>-->
+                    <!--                        </manifest>-->
+                    <!--                    </archive>-->
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
