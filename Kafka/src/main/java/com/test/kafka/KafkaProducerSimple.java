@@ -34,7 +34,7 @@ public class KafkaProducerSimple {
         /*
          * kafka broker对应的主机，格式为host1:port1,host2:port2
          */
-        props.put("metadata.broker.list", "cdh04:9092");
+        props.put("metadata.broker.list", "skuldcdhtest1:9092");
         /*
          * request.required.acks,设置发送数据是否需要服务端的反馈,有三个值0,1,-1
          * 0，意味着producer永远不会等待一个来自broker的ack，这就是0.7版本的行为。
@@ -66,7 +66,7 @@ public class KafkaProducerSimple {
             @Override
             public void run() {
                 // 1 49 40 1
-                for (int messageNo = 1; messageNo <= 5000000; messageNo++) {
+                for (int messageNo = 1; messageNo <= 50000; messageNo++) {
 //            String messageStr = new String(messageNo + "注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，" +
 //                    "注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发" +
 //                    "注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发" +
@@ -81,8 +81,8 @@ public class KafkaProducerSimple {
                      * 5、调用producer的send方法发送数据
                      * 注意：这里需要指定 partitionKey，用来配合自定义的MyLogPartitioner进行数据分发
                      */
-                    producer.send(new KeyedMessage<String, String>(TOPIC, messageNo + "", messageNo + ""));
-//                    producer.send(new KeyedMessage<String, String>(TOPIC, "a"));
+//                    producer.send(new KeyedMessage<String, String>(TOPIC, messageNo + "", messageNo + ""));
+                    producer.send(new KeyedMessage<String, String>(TOPIC, "a"));
                 }
 
             }

@@ -4,6 +4,7 @@ import java.util
 import java.util.Properties
 
 import com.alibaba.fastjson.JSON
+import com.test.flink.CustomParquetAvroWriters
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericRecord
 import org.apache.flink.streaming.api.scala.StreamExecutionEnvironment
@@ -18,6 +19,7 @@ import org.apache.flink.streaming.api.functions.sink.filesystem.rollingpolicies.
 import org.apache.flink.streaming.api.functions.sink.filesystem.{BucketAssigner, StreamingFileSink}
 import org.apache.flink.streaming.api.scala._
 import org.apache.kafka.clients.producer.ProducerConfig
+import org.apache.parquet.hadoop.metadata.CompressionCodecName
 
 
 /**
@@ -69,7 +71,7 @@ object WriteHiveOnSink {
     //    student.addSink(sink)
 
     val sink = StreamingFileSink
-      .forBulkFormat(new Path("F:\\test\\Demo\\Flink10\\src\\main\\resources"), ParquetAvroWriters.forReflectRecord(classOf[Demo]))
+      .forBulkFormat(new Path("F:\\test\\Demo\\Flink10\\src\\main\\resources"), CustomParquetAvroWriters.forReflectRecord(classOf[Demo], CompressionCodecName.SNAPPY))
       .withBucketAssigner(new BucketAssigner[Demo, String] {
         override def getBucketId(element: Demo, context: BucketAssigner.Context): String = {
           s"platform=${element.platform}/event=${element.event}"
@@ -82,8 +84,7 @@ object WriteHiveOnSink {
       .build()
 
 
-
-    student.print()
+    student.addSink(sink)
     env.execute("write hdfs")
   }
 }

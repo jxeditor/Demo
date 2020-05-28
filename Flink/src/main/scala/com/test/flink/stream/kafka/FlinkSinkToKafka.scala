@@ -38,7 +38,7 @@ object FlinkSinkToKafka {
     })
 
     // student.addSink(new FlinkKafkaProducer010("hadoop01:9092", "test01", new SimpleStringSchema)).name("test01")
-    student.addSink(new FlinkKafkaProducer010("skuldcdhtest1.ktcs:9092", "test01", new CustomKafkaSerializationSchema))
+    // student.addSink(new FlinkKafkaProducer010("skuldcdhtest1.ktcs:9092", "test01", new CustomKafkaSerializationSchema))
 
     //      .setParallelism(6)
 

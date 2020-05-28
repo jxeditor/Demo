@@ -22,7 +22,10 @@ abstract class GlobalEnum() extends Enumeration {
     val arr = super.values.toArray
     var builder = Seq.newBuilder[GlobalValue]
     for (value <- arr) {
-      builder.+=(value.asInstanceOf[GlobalValue])
+      value match {
+        case v: GlobalValue => builder.+=(v)
+        case _ =>
+      }
     }
     builder.result()
   }
