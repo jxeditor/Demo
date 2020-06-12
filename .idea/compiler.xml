@@ -9,12 +9,13 @@
         <module name="flink" />
         <module name="flink10" />
         <module name="Metics" />
-        <module name="Spark" />
-        <module name="spark" />
+        <module name="Flink11" />
         <module name="Flink10" />
         <module name="Flink" />
         <module name="kafka" />
         <module name="Kafka" />
+        <module name="spark" />
+        <module name="Spark" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8" />

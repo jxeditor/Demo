@@ -1,5 +1,3 @@
-package com.test.flink.commons
-
 /**
   * @Author: xs
   * @Date: 2020-03-19 16:39
@@ -47,7 +45,7 @@ object CreateDDL {
       //      " 'connector.specific-offsets' = 'partition:0,offset:42;partition:1,offset:300',"  // 从指定分区的offset开始消费
       //      " 'connector.startup-mode' = 'earliest-offset', " +
       " 'connector.startup-mode' = 'latest-offset', " +
-      " 'format.type' = 'custom', " +
+      " 'format.type' = 'json', " +
       " 'format.derive-schema' = 'true'" +
       //      " 'format.json-schema' = " +
       //      "     '{" +

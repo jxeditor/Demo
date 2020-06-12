@@ -11,6 +11,9 @@ import org.json.{JSONArray, JSONObject}
  */
 object JsonDemo {
   def main(args: Array[String]): Unit = {
+    val shuffle = true
+    if (shuffle) println(1)
+    else println(2)
     val id = "1"
     val temp = new JSONObject()
     var index = -1

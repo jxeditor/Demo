@@ -16,16 +16,20 @@ object HiveReadDemo {
       .enableHiveSupport()
       .getOrCreate()
 
+    val source = session.sql(
+      s"""
+         |select p,id,platform,channel,region,server,data_unix,uid,rid,did from xs_test.event_test where app='h5_12mlcs' and dt ='2020-06-09' and event = 'event_role.activity_4'
+         |""".stripMargin).repartition(1)
+
+    source.createOrReplaceTempView("temp")
+
     val frame = session.sql(
       s"""
-         |select *
-         |from game_ods.event
-         |WHERE app='game_skuld_01'
-         |AND dt='2019-08-16'
-         |AND event='event_app.track_2'
-         |limit 1
+         |insert overwrite table xs_test.event_sink partition(app='h5_12mlcs',dt ='2020-06-09',event = 'event_role.activity_4')
+         |select * from temp
          |""".stripMargin
     )
+
     frame.show()
     session.stop()
   }

@@ -10,7 +10,7 @@ object Test {
   def main(args: Array[String]): Unit = {
 
     val info = GenericElasticSinkInfo(hiveType = "login", (app, dt, selectAll) => {
-//      s"app='$app' and dt='$dt' and event='$hiveType'"
+      s"app='$app' and dt='$dt' and event=''"
     })
 
     info.hiveWhere("yys", "2020-05-23", true)
