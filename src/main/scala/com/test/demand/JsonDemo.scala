@@ -28,7 +28,7 @@ object JsonDemo {
       }
     }
     if (!flag)
-      arr.remove(index)
+//      arr.remove(index)
     arr.put(temp)
     println(arr.toString)
 

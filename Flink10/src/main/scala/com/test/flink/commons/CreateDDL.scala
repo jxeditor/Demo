@@ -47,7 +47,7 @@ object CreateDDL {
       //      " 'connector.specific-offsets' = 'partition:0,offset:42;partition:1,offset:300',"  // 从指定分区的offset开始消费
       //      " 'connector.startup-mode' = 'earliest-offset', " +
       " 'connector.startup-mode' = 'latest-offset', " +
-      " 'format.type' = 'custom', " +
+      " 'format.type' = 'custom1', " +
       " 'format.derive-schema' = 'true'" +
       //      " 'format.json-schema' = " +
       //      "     '{" +
