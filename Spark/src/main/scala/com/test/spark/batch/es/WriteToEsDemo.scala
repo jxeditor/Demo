@@ -2,7 +2,7 @@ package com.test.spark.batch.es
 
 import org.apache.spark.sql.SparkSession
 import org.elasticsearch.spark._
-import org.elasticsearch.spark.sql.EsSparkSQL
+import org.elasticsearch.spark.sql._
 
 /**
  * @Author: xs
@@ -11,21 +11,23 @@ import org.elasticsearch.spark.sql.EsSparkSQL
  */
 object WriteToEsDemo {
   def main(args: Array[String]): Unit = {
-    System.setProperty("hadoop.home.dir", "D:\\DevEnv\\Hadoop\\2.6.0")
+    System.setProperty("hadoop.home.dir", "E:\\Soft\\hadoop-2.8.0")
     val spark: SparkSession = SparkSession.builder().appName("WriteToEsDemo")
       .master("local[*]")
       .config("es.index.auto.create", "true")
-      .config("es.nodes", "ip1:9200,ip2:9200,ip2:9200")
+      .config("es.nodes", "skuldcdhtest1.ktcs:9200,skuldcdhtest2.ktcs:9200,skuldcdhtest3.ktcs:9200")
+      .enableHiveSupport()
       .getOrCreate()
 
     // EsSparkSQL.esDF(spark,"/test")
 
-    val lines = spark.read.textFile("D:\\工作\\IdeaProjects\\Demo\\Spark\\src\\main\\resources\\wc")
-    import spark.implicits._
-    val rdd = lines.flatMap(_.split(" ")).map((_, 1)).rdd.reduceByKey(_ + _)
+    val df = spark.sql(
+      s"""
+         |select p,id,platform,channel,region,server,data_unix,uid,rid,did from game_ods.event where app='game_skuld_01' and dt ='2020-06-09' and event = 'event_role.activity_4'
+         |""".stripMargin)
 
-    rdd.saveToEs("user_index",Map("es.mapping.id" -> "id"))
-    println(rdd.collect().toList)
+//    df.show(1)StreamTask
+    df.saveToEs("rs_offline_test",Map("es.mapping.id" -> "id"))
   }
 
   case class User(id: String, user_name: String, user_age: String)

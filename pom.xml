@@ -23,14 +23,35 @@
         <es.version>6.6.1</es.version>
         <spark.version>1.6.3</spark.version>
         <prometheus.version>0.8.0</prometheus.version>
+        <typesafe.config.version>1.3.4</typesafe.config.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>io.protostuff</groupId>
+            <artifactId>protostuff-core</artifactId>
+            <version>1.5.9</version>
+        </dependency>
+        <dependency>
+            <groupId>io.protostuff</groupId>
+            <artifactId>protostuff-runtime</artifactId>
+            <version>1.5.9</version>
+        </dependency>
+        <dependency>
+            <groupId>io.protostuff</groupId>
+            <artifactId>protostuff-api</artifactId>
+            <version>1.5.9</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.hive</groupId>
             <artifactId>hive-exec</artifactId>
             <version>2.1.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.typesafe</groupId>
+            <artifactId>config</artifactId>
+            <version>${typesafe.config.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.amazonaws</groupId>

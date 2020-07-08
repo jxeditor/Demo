@@ -28,6 +28,12 @@ public class StealGold {
 
         // calculate(金子分布,状态二维数组,已连偷个数,剩余个数)
         calculate(array, dp, 0, array.length);
+        for (int i = 0; i < dp.length; i++) {
+            for (int j = 0; j < dp[0].length; j++) {
+                System.out.print(dp[i][j]+" ");
+            }
+            System.out.println();
+        }
         return dp[0][array.length];
     }
 
@@ -44,6 +50,7 @@ public class StealGold {
         }
         int right = calculate(array, dp, 0, remaining - 1);
         // 取left和right比较的最大值
+        System.out.println(left+"==="+right);
         dp[front][remaining] = Math.max(left, right);
         return dp[front][remaining];
     }

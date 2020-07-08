@@ -27,7 +27,7 @@ import org.apache.parquet.hadoop.metadata.CompressionCodecName
   */
 object WriteHiveOnSink {
   def main(args: Array[String]): Unit = {
-    val READ_TOPIC = "game_log_game_skuld_01"
+    val READ_TOPIC = "test"
     val env = StreamExecutionEnvironment.getExecutionEnvironment
     env.enableCheckpointing(5000L, CheckpointingMode.EXACTLY_ONCE)
     val props = new Properties()
@@ -48,12 +48,12 @@ object WriteHiveOnSink {
 
     val student = env.addSource(new FlinkKafkaConsumer(
       READ_TOPIC, //这个 kafka topic 需要和上面的工具类的 topic 一致
-      new SimpleStringSchema, props).setStartFromEarliest()
+      new SimpleStringSchema, props).setStartFromLatest()
     ).map(x => {
       val obj = JSON.parseObject(x)
       val data = obj.getJSONObject("param_data")
       data.getString("platform_s") + "," + data.getString("category_s") + "," + data.getString("app_version_code_s")
-      Demo(data.getString("platform_s"), data.getString("category_s"), data.getString("app_version_code_s"))
+      Demo(data.getString("platform_s"), data.getString("category_s"), 100000000L)
     })
 
 
@@ -89,4 +89,4 @@ object WriteHiveOnSink {
   }
 }
 
-case class Demo(platform: String, event: String, dt: String)
+case class Demo(platform: String, event: String, dt: Long)
