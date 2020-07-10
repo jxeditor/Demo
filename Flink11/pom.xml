@@ -9,7 +9,7 @@
     <version>1.0</version>
 
     <properties>
-        <flink.version>1.11-SNAPSHOT</flink.version>
+        <flink.version>1.11.0</flink.version>
         <scala.binary.version>2.11</scala.binary.version>
         <scala.version>2.11.12</scala.version>
     </properties>
@@ -62,10 +62,27 @@
 
         <dependency>
             <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-filesystem_${scala.binary.version}</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.flink</groupId>
             <artifactId>flink-shaded-jackson</artifactId>
             <version>2.10.1-11.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>2.7.5</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-hdfs</artifactId>
+            <version>2.7.5</version>
+
+        </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-table-api-scala-bridge_2.11</artifactId>
@@ -83,12 +100,12 @@
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-orc_${scala.binary.version}</artifactId>
             <version>${flink.version}</version>
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.apache.hive</groupId>-->
-<!--                    <artifactId>hive-storage-api</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
+            <!--            <exclusions>-->
+            <!--                <exclusion>-->
+            <!--                    <groupId>org.apache.hive</groupId>-->
+            <!--                    <artifactId>hive-storage-api</artifactId>-->
+            <!--                </exclusion>-->
+            <!--            </exclusions>-->
         </dependency>
 
         <dependency>
@@ -169,22 +186,22 @@
         </plugins>
     </build>
 
-<!--    <reporting>-->
-<!--        <plugins>-->
-<!--            <plugin>-->
-<!--                <groupId>org.scala-tools</groupId>-->
-<!--                <artifactId>maven-scala-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <scalaVersion>${scala.version}</scalaVersion>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--        </plugins>-->
-<!--    </reporting>-->
+    <!--    <reporting>-->
+    <!--        <plugins>-->
+    <!--            <plugin>-->
+    <!--                <groupId>org.scala-tools</groupId>-->
+    <!--                <artifactId>maven-scala-plugin</artifactId>-->
+    <!--                <configuration>-->
+    <!--                    <scalaVersion>${scala.version}</scalaVersion>-->
+    <!--                </configuration>-->
+    <!--            </plugin>-->
+    <!--        </plugins>-->
+    <!--    </reporting>-->
 
-<!--    <repositories>-->
-<!--        <repository>-->
-<!--            <id>conjars.org</id>-->
-<!--            <url>https://conjars.org/repo/</url>-->
-<!--        </repository>-->
-<!--    </repositories>-->
+    <!--    <repositories>-->
+    <!--        <repository>-->
+    <!--            <id>conjars.org</id>-->
+    <!--            <url>https://conjars.org/repo/</url>-->
+    <!--        </repository>-->
+    <!--    </repositories>-->
 </project>
