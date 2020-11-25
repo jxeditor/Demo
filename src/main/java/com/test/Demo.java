@@ -1,5 +1,8 @@
 package com.test;
 
+
+import org.apache.commons.codec.digest.DigestUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -9,14 +12,21 @@ import java.util.Arrays;
 public class Demo {
     public static void main(String[] args) {
 
-        ArrayList<String> list = new ArrayList<>(0);
-        list.set(0,"");
+//        ArrayList<String> list = new ArrayList<>(0);
+//        list.set(0,"");
+//
+//        int value = 100000000;
+//        do {
+//            value >>>= 8;
+//            System.out.println(value);
+//        } while (value != 0);
 
-        int value = 100000000;
-        do {
-            value >>>= 8;
-            System.out.println(value);
-        } while (value != 0);
+        System.out.println(DigestUtils.md5Hex("新疆昌吉回族自治州军户农场厂部\n"));
+        System.out.println(DigestUtils.md5Hex("新疆昌吉回族自治州军户农场厂部\r"));
+        System.out.println(DigestUtils.md5Hex("新疆昌吉回族自治州军户农场厂部"));
+        System.out.println(DigestUtils.md5Hex("新疆昌吉回族自治州军户农场厂部 "));
+
+
     }
 
 
